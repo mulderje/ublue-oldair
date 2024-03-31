@@ -27,14 +27,9 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
       - akmod-facetimehd # From the above mulderje/facetimehd-kmod COPR.
-    install:
-      # - micro
-      # - starship
     remove:
-      # example: removing firefox (in favor of the flatpak)
-      # "firefox" is the main package, "firefox-langpacks" is a dependency
       - firefox
-      - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+      - firefox-langpacks
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
