@@ -27,6 +27,7 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
       - akmod-facetimehd # From the above mulderje/facetimehd-kmod COPR.
+      - mbpfan
     remove:
       - firefox
       - firefox-langpacks
