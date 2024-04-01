@@ -2,6 +2,7 @@
 
 set -oeux pipefail
 
+export KERNEL_NAME="kernel"
 
 ARCH="$(rpm -E '%_arch')"
 KERNEL="$(rpm -q "${KERNEL_NAME}" --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
