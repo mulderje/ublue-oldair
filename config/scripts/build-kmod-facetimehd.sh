@@ -13,7 +13,7 @@ RELEASE="$(rpm -E '%fedora')"
 
 ### BUILD facetimehd (succeed or fail-fast with debug output)
 rpm-ostree install \
-    akmod-facetimehd.fc${RELEASE}.${ARCH} \
+    akmod-facetimehd-*.fc${RELEASE}.${ARCH} \
     facetimehd-firmware
 akmods --force --kernels "${KERNEL}" --kmod facetimehd
 modinfo /usr/lib/modules/${KERNEL}/extra/facetimehd/facetimehd.ko.xz > /dev/null \
