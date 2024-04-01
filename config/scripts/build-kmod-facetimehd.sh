@@ -4,7 +4,7 @@ set -oeux pipefail
 
 export KERNEL_NAME="kernel"
 mkdir -p /tmp /var/tmp && \
-chmod -R 1777 /tmp /var/tmp
+chmod -R 1777 /var/tmp
 
 wget https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-$(rpm -E %fedora)/mulderje-facetimehd-kmod-fedora-$(rpm -E %fedora).repo -O /etc/yum.repos.d/_copr_mulderje-facetimehd-kmod.repo
 
