@@ -51,6 +51,11 @@ modules:
       remove:
         # - org.gnome.eog
 
+  - type: bling
+    install:
+      - ublue-update # https://github.com/ublue-os/ublue-update
+      - laptop
+
   - type: systemd
     system:
       enabled:
