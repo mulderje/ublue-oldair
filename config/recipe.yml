@@ -53,7 +53,6 @@ modules:
 
   - type: bling
     install:
-      - ublue-update # https://github.com/ublue-os/ublue-update
       - laptop
 
   - type: systemd
