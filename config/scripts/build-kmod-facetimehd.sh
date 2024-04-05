@@ -13,7 +13,7 @@ ARCH="$(rpm -E '%_arch')"
 KERNEL="$(rpm -q "${KERNEL_NAME:-kernel}" --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 RELEASE="$(rpm -E '%fedora')"
 
-if [[ "${RELEASE}" -ge 40 ]]; then
+if [[ "${RELEASE}" -ge 41 ]]; then
     COPR_RELEASE="rawhide"
 else
     COPR_RELEASE="${RELEASE}"
