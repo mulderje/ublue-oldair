@@ -27,6 +27,8 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
       #- facetimehd-kmod # From the above mulderje/facetimehd-kmod COPR.
+      - akmods
+      - mock
       - facetimehd-firmware # Not sure why I need to add explicitly...
       - mbpfan
     remove:
