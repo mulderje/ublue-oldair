@@ -17,6 +17,11 @@ modules:
           # put configuration files you want in /etc/ on a booted system 
           # in /usr/etc/ in the image. read more in files module reference.
 
+  - type: script
+    snippets:
+      # Needed to build the akmods
+      - "ln -sf /usr/bin/ld.bfd /etc/alternatives/ld && ln -sf /etc/alternatives/ld /usr/bin/ld"
+
   - type: akmods
     base: main
     install:
