@@ -17,11 +17,6 @@ modules:
           # put configuration files you want in /etc/ on a booted system 
           # in /usr/etc/ in the image. read more in files module reference.
 
-  - type: script
-    snippets:
-      # Needed to build the akmods
-      - "ln -sf /usr/bin/ld.bfd /etc/alternatives/ld && ln -sf /etc/alternatives/ld /usr/bin/ld"
-
   - type: akmods
     base: main
     install:
@@ -31,14 +26,14 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
-      #- facetimehd-kmod # From the above mulderje/facetimehd-kmod COPR.
-      - akmods
-      - mock
-      - facetimehd-firmware # Not sure why I need to add explicitly...
       - mbpfan
     remove:
       - firefox
       - firefox-langpacks
+
+  - type: script
+    scripts:
+    - build-kmod-facetimehd.sh
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
