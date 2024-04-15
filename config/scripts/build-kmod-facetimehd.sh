@@ -2,7 +2,7 @@
 
 set -oeux pipefail
 
-mkdir -p /tmp /var/tmp /var/lib/alternatives
+mkdir -p /tmp /var/tmp /var/lib/alternatives /var/cache/rpms/kmods
 chmod -R 1777 /var/tmp
 
 # From: https://github.com/ublue-os/akmods/pull/158#issuecomment-2030445267
