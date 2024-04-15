@@ -25,6 +25,7 @@ wget "https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedo
 rpm-ostree install \
     akmod-facetimehd-*.fc${RELEASE}.${ARCH}
 akmods --force --kernels "${KERNEL}" --kmod facetimehd
-modinfo "/usr/lib/modules/${KERNEL}/extra/facetimehd/facetimehd.ko.xz" > /dev/null 
+modinfo "/usr/lib/modules/${KERNEL}/extra/facetimehd/facetimehd.ko.xz" > /dev/null \
+|| (find /var/cache/akmods/facetimehd/ -name \*.log -print -exec cat {} \; && exit 1)
 
 rm -f /etc/yum.repos.d/_copr_mulderje-facetimehd-kmod.repo
