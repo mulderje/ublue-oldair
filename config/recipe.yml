@@ -26,15 +26,9 @@ modules:
       - firefox
       - firefox-langpacks
 
-  - type: akmods
-    base: main
-    install:
-      - wl
-
   - type: script
     scripts:
     - build-kmod-facetimehd.sh
-
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
@@ -53,6 +47,10 @@ modules:
       # Installing different branches of the same Flatpak is not supported.
       remove:
         # - org.gnome.eog
+
+  - type: bling
+    install:
+      - laptop
 
   - type: systemd
     system:
