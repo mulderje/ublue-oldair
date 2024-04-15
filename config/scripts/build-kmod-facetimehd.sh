@@ -21,6 +21,8 @@ fi
 
 wget "https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-${COPR_RELEASE}/mulderje-facetimehd-kmod-fedora-${COPR_RELEASE}.repo" -O /etc/yum.repos.d/_copr_mulderje-facetimehd-kmod.repo
 
+rpm-ostree install akmods mock
+
 ### BUILD facetimehd (succeed or fail-fast with debug output)
 rpm-ostree install \
     akmod-facetimehd-*.fc${RELEASE}.${ARCH}
