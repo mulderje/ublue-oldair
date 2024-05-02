@@ -17,11 +17,6 @@ modules:
           # put configuration files you want in /etc/ on a booted system 
           # in /usr/etc/ in the image. read more in files module reference.
 
-  - type: akmods
-    base: main
-    install:
-      - wl
-
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
@@ -36,9 +31,11 @@ modules:
       - firefox
       - firefox-langpacks
 
-  - type: script
-    scripts:
-    - build-kmod-facetimehd.sh
+  - type: akmods
+    base: main
+    install:
+      - facetimehd
+      - wl
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
