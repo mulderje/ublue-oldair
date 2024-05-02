@@ -20,6 +20,7 @@ modules:
   - type: akmods
     base: main
     install:
+      - facetimehd
       - wl
 
   - type: rpm-ostree
@@ -35,10 +36,6 @@ modules:
     remove:
       - firefox
       - firefox-langpacks
-
-  - type: script
-    scripts:
-    - build-kmod-facetimehd.sh
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
