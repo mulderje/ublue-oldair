@@ -22,10 +22,32 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
       - https://pkgs.tailscale.com/stable/fedora/tailscale.repo
     install:
+      - bash-color-prompt
+      - ifuse
+      - helix
+      - jq
+      - just
+      - libimobiledevice 
+      - libvirt
       - mbpfan
+      - neovim
+      - p7zip
+      - p7zip-plugins
+      - podman-compose
+      - podman-tui
+      - podmansh
+      - qemu
+      - qemu-system-aarch64-core
+      - qemu-system-x86-core
+      - ripgrep
       - tailscale
       - tmux
-      - vim-minimal
+      - usbmuxd
+      - vim
+      - virt-install
+      - virt-manager
+      - virt-viewer
+      - wireguard-tools
 
     remove:
       - firefox
@@ -51,6 +73,7 @@ modules:
     system:
       enabled:
         - mbpfan.service
+        - podman-auto-update.timer
         - tailscaled.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
