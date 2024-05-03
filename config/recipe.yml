@@ -36,6 +36,7 @@ modules:
       - podman-compose
       - podman-tui
       - podmansh
+      - policycoreutils-python-utils
       - qemu
       - qemu-char-spice
       - qemu-device-display-virtio-gpu
@@ -49,6 +50,7 @@ modules:
       - ripgrep
       - setools-console
       - setools-console-analyses
+      - setroubleshoot-server
       - tailscale
       - tmux
       - usbmuxd
