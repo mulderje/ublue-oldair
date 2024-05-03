@@ -47,6 +47,8 @@ modules:
       - qemu-user-binfmt
       - qemu-user-static
       - ripgrep
+      - setools-console
+      - setools-console-analyses
       - tailscale
       - tmux
       - usbmuxd
