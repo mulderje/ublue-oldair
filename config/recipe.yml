@@ -76,10 +76,6 @@ modules:
       install:
         - org.mozilla.firefox
 
-  - type: bling
-    install:
-      - laptop
-
   - type: fonts
     fonts:
       nerd-fonts:
