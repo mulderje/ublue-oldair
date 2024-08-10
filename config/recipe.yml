@@ -59,6 +59,7 @@ modules:
       - virt-manager
       - virt-viewer
       - wireguard-tools
+      - wpa_supplicant-2.10 # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
 
     remove:
       - firefox
