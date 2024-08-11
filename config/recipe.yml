@@ -60,10 +60,11 @@ modules:
       - virt-viewer
       - wireguard-tools
 
-    replace:
-      - from-repo: fedora
-        packages:
-          - wpa_supplicant-2.10 # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
+    remove:
+      - wpa_supplicant
+    install:
+      - wpa_supplicant-2.10 
 
     remove:
       - firefox
