@@ -65,7 +65,7 @@ modules:
     # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
   - type: script
     snippets:
-      - "sudo rpm-ostree override replace https://koji.fedoraproject.org/koji/buildinfo?buildID=2406268"
+      - "curl -LsSf -o wpa_supplicant.rpm https://rpmfind.net/linux/fedora/linux/releases/40/Everything/x86_64/os/Packages/w/wpa_supplicant-2.10-10.fc40.x86_64.rpm && rpm-ostree override replace ./wpa_supplicant.rpm"
 
   - type: akmods
     base: main
