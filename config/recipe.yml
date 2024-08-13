@@ -67,7 +67,7 @@ modules:
     # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
   - type: script
     snippets:
-      - "sudo rpm-ostree override replace https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b"
+      - "mkdir -p /tmp /var/tmp && chmod -R 1777 /var/tmp && rpm-ostree override replace https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b"
 
   - type: akmods
     base: main
