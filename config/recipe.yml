@@ -60,10 +60,11 @@ modules:
       - virt-viewer
       - wireguard-tools
 
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
     replace:
-      - from-repo: fedora
+      - from-repo: https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b
         packages:
-          - wpa_supplicant-2.10 # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
+          - wpa_supplicant-2.10
 
     remove:
       - firefox
