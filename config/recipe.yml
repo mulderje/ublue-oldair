@@ -62,7 +62,7 @@ modules:
 
     # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
     replace:
-      - override: https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b
+      - https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b
 
     remove:
       - firefox
