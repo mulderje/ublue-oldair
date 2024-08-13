@@ -62,7 +62,7 @@ modules:
 
     # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
     replace:
-      - from-repo: https://bodhi.fedoraproject.org/updates/FEDORA-2024-36e68c2a1b
+      - from-repo: https://kojipkgs.fedoraproject.org/packages/wpa_supplicant/2.10/10.fc40/
         packages:
           - wpa_supplicant-2.10
 
