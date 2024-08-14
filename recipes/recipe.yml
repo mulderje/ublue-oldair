@@ -15,6 +15,12 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2302577
+  - type: script
+    snippets:
+      - "sed -i '0,/enabled=0/{s/enabled=0/enabled=1\npriority=110/}' /etc/yum.repos.d/fedora-updates-testing.repo"
+
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
