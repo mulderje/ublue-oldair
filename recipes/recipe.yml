@@ -68,6 +68,10 @@ modules:
       - facetimehd
       - wl
 
+  - type: script
+    snippets:
+      - "sudo rpm-ostree override replace akmod-wl --experimental --from repo='rpmfusion-nonfree-updates-testing'"
+
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
