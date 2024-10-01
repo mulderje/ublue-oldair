@@ -4,7 +4,7 @@ name: ublue-oldair
 description: This is my personal base-OS image for my early Intel MacBook.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/kinoite-main
+base-image: ghcr.io/ublue-os/aurora-dx
 image-version: latest
 
 # module configuration, executed in order
