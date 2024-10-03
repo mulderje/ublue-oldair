@@ -39,7 +39,6 @@ modules:
     base: fsync # Needs to be fsync vs main when on :latest image tag
     install:
       - facetimehd
-      - wl
 
   - type: systemd
     system:
