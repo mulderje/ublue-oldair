@@ -36,7 +36,7 @@ modules:
         - wpa_supplicant
 
   - type: akmods
-    base: main
+    base: fsync # Needs to be fsync vs main when on :latest image tag
     install:
       - facetimehd
       - wl
