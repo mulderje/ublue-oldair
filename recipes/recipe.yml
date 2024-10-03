@@ -4,7 +4,7 @@ name: ublue-oldair
 description: This is my personal base-OS image for my early Intel MacBook.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/kinoite-main
+base-image: ghcr.io/ublue-os/aurora-dx
 image-version: latest
 
 # module configuration, executed in order
@@ -18,49 +18,17 @@ modules:
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
-      - https://pkgs.tailscale.com/stable/fedora/tailscale.repo
     install:
-      - bash-color-prompt
-      - ifuse
       - helix
       - jq
-      - just
-      - libimobiledevice 
-      - libvirt
       - mbpfan
       - neovim
-      - p7zip
-      - p7zip-plugins
-      - podman-compose
-      - podman-tui
-      - podmansh
       - policycoreutils-python-utils
-      - qemu
-      - qemu-char-spice
-      - qemu-device-display-virtio-gpu
-      - qemu-device-display-virtio-vga
-      - qemu-device-usb-redirect
-      - qemu-img
-      - qemu-system-aarch64-core
-      - qemu-system-x86-core
-      - qemu-user-binfmt
-      - qemu-user-static
       - ripgrep
       - setools-console
       - setools-console-analyses
       - setroubleshoot-server
-      - tailscale
-      - tmux
-      - usbmuxd
       - vim
-      - virt-install
-      - virt-manager
-      - virt-viewer
-      - wireguard-tools
-
-    remove:
-      - firefox
-      - firefox-langpacks
 
     replace:
     - from-repo: https://copr.fedorainfracloud.org/coprs/mulderje/intel-mac-rpms/repo/fedora-%OS_VERSION%/mulderje-intel-mac-rpms-fedora-%OS_VERSION%.repo
@@ -68,35 +36,13 @@ modules:
         - wpa_supplicant
 
   - type: akmods
-    base: main
+    base: fsync # Needs to be fsync vs main when on :latest image tag
     install:
       - facetimehd
-      - wl
-
-  - type: default-flatpaks
-    notify: true # Send notification after install/uninstall is finished (true/false)
-    system:
-      install:
-        - org.mozilla.firefox
-
-  - type: fonts
-    fonts:
-      nerd-fonts:
-        - FiraCode # don't add spaces or "Nerd Font" suffix.
-        - Hack
-        - SourceCodePro
-        - Terminus
-        - JetBrainsMono
-        - NerdFontsSymbolsOnly
-      google-fonts:
-        - Roboto
-        - Open Sans 
 
   - type: systemd
     system:
       enabled:
         - mbpfan.service
-        - podman-auto-update.timer
-        - tailscaled.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
