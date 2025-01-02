@@ -40,7 +40,6 @@ modules:
     base: main
     install:
       - facetimehd
-      - wl
 
   - type: systemd
     system:
