@@ -37,7 +37,7 @@ modules:
 #        - wpa_supplicant
 
   - type: akmods
-    base: coreos-stable
+    base: main
     install:
       - facetimehd
 
