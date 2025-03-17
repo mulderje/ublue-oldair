@@ -36,10 +36,9 @@ modules:
 #      packages:
 #        - wpa_supplicant
 
-  - type: akmods
-    base: coreos-stable
-    install:
-      - facetimehd
+  - type: script
+    scripts:
+      - build-kmod-facetimehd.sh
 
   - type: systemd
     system:
