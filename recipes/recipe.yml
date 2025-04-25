@@ -16,8 +16,6 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: rpm-ostree
-    repos:
-      - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
       - helix
       - jq
@@ -29,12 +27,6 @@ modules:
       - setools-console-analyses
       - setroubleshoot-server
       - vim
-
-  # TODO: commented out to test latest release, may need to revert to known stable below.
-  #    replace:
-  #    - from-repo: https://copr.fedorainfracloud.org/coprs/mulderje/intel-mac-rpms/repo/fedora-%OS_VERSION%/mulderje-intel-mac-rpms-fedora-%OS_VERSION%.repo
-  #      packages:
-  #        - wpa_supplicant
 
   - type: script
     scripts:
