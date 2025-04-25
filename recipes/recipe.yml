@@ -19,9 +19,6 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/mulderje/facetimehd-kmod/repo/fedora-%OS_VERSION%/mulderje-facetimehd-kmod-fedora-%OS_VERSION%.repo
     install:
-      - akmod-wl
-      - broadcom-wl
-      - kmod-wl
       - helix
       - jq
       - mbpfan
@@ -42,6 +39,11 @@ modules:
   - type: script
     scripts:
       - build-kmod-facetimehd.sh
+
+  - type: akmods
+    base: main
+    install:
+      - wl
 
   - type: systemd
     system:
