@@ -21,6 +21,7 @@ modules:
     install:
       - akmod-wl
       - broadcom-wl
+      - kmod-wl
       - helix
       - jq
       - mbpfan
