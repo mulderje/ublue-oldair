@@ -8,7 +8,9 @@ RELEASE="$(rpm -E '%fedora')"
 
 # TODO: fix terra wl spec
 # dnf5 -y config-manager setopt "terra".enabled=true
-sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/rpmfusion-*.repo
+dnf5 install -y \
+  https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
+  https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
 ### BUILD wl (succeed or fail-fast with debug output)
 dnf5 install -y \
