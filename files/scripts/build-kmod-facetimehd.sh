@@ -24,7 +24,7 @@ WORKDIR="$(mktemp -d)"
 (
   cd "${WORKDIR}"
   dnf5 download --source akmod-facetimehd
-  rpmbuild --rebuild --define "_topdir ${WORKDIR}/rpmbuild" akmod-facetimehd-*.src.rpm
+  rpmbuild --rebuild --define "_topdir ${WORKDIR}/rpmbuild" facetimehd-kmod-*.src.rpm
 )
 
 dnf5 install -y "${WORKDIR}"/rpmbuild/RPMS/*/akmod-facetimehd-*.rpm
