@@ -6,7 +6,7 @@ ARCH="$(rpm -E '%_arch')"
 KERNEL="$(rpm -q "${KERNEL_NAME:-kernel}" --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 RELEASE="$(rpm -E '%fedora')"
 
-dnf5 -y copr enable mulderje/facetimehd-kmod
+dnf5 -y copr enable mulderje/facetimehd-kmod-pr
 
 ### BUILD facetimehd (succeed or fail-fast with debug output)
 # Install akmods first so its scriptlets create the `akmods` system user.
@@ -26,4 +26,4 @@ akmods --force --kernels "${KERNEL}" --kmod facetimehd
 modinfo "/usr/lib/modules/${KERNEL}/extra/facetimehd/facetimehd.ko.xz" >/dev/null ||
   (find /var/cache/akmods/facetimehd/ -name \*.log -print -exec cat {} \; && exit 1)
 
-dnf5 -y copr disable mulderje/facetimehd-kmod
+dnf5 -y copr disable mulderje/facetimehd-kmod-pr
