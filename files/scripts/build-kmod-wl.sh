@@ -12,18 +12,20 @@ dnf5 install -y \
   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
-# Ensure akmods is installed first so its scriptlet creates the akmods
-# system user; without it, akmods' runuser -u akmods fallback trips
-# akmodsbuild's "Not to be used as root" guard during the OCI build.
-dnf5 install -y akmods
-getent passwd akmods >/dev/null 2>&1 || useradd -r -s /sbin/nologin -d /var/cache/akmods akmods
-
 ### BUILD wl (succeed or fail-fast with debug output)
-# Skip scriptlets: the akmod-*.rpm %post auto-invokes akmods and trips
-# akmodsbuild's root guard inside the OCI build. We invoke akmods
-# explicitly below to perform the real build.
-dnf5 install -y --setopt=tsflags=noscripts \
+# Install akmods first so its scriptlets create the `akmods` system user.
+# In minimal OCI builds, the implicit Requires: chain from akmod-wl
+# sometimes leaves the user uncreated, which makes `akmods` fall through
+# to invoking akmodsbuild as root and trip its "-w /" guard:
+#   >>> ERROR: Not to be used as root; start as user or 'akmodsbuild' instead.
+dnf5 install -y \
+  akmods \
   akmod-wl-*.fc${RELEASE}.${ARCH}
+
+# Belt-and-braces: if the scriptlet still didn't create the user, do it now.
+getent passwd akmods >/dev/null \
+  || useradd -r -s /sbin/nologin -d /var/cache/akmods akmods
+
 akmods --force --kernels "${KERNEL}" --kmod wl
 modinfo /usr/lib/modules/${KERNEL}/extra/wl/wl.ko.xz >/dev/null ||
   (find /var/cache/akmods/wl/ -name \*.log -print -exec cat {} \; && exit 1)
