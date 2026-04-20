@@ -19,7 +19,10 @@ dnf5 install -y akmods
 getent passwd akmods >/dev/null 2>&1 || useradd -r -s /sbin/nologin -d /var/cache/akmods akmods
 
 ### BUILD wl (succeed or fail-fast with debug output)
-dnf5 install -y \
+# Skip scriptlets: the akmod-*.rpm %post auto-invokes akmods and trips
+# akmodsbuild's root guard inside the OCI build. We invoke akmods
+# explicitly below to perform the real build.
+dnf5 install -y --setopt=tsflags=noscripts \
   akmod-wl-*.fc${RELEASE}.${ARCH}
 akmods --force --kernels "${KERNEL}" --kmod wl
 modinfo /usr/lib/modules/${KERNEL}/extra/wl/wl.ko.xz >/dev/null ||
