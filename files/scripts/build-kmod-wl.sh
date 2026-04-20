@@ -12,6 +12,12 @@ dnf5 install -y \
   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
+# Ensure akmods is installed first so its scriptlet creates the akmods
+# system user; without it, akmods' runuser -u akmods fallback trips
+# akmodsbuild's "Not to be used as root" guard during the OCI build.
+dnf5 install -y akmods
+getent passwd akmods >/dev/null 2>&1 || useradd -r -s /sbin/nologin -d /var/cache/akmods akmods
+
 ### BUILD wl (succeed or fail-fast with debug output)
 dnf5 install -y \
   akmod-wl-*.fc${RELEASE}.${ARCH}
