@@ -16,7 +16,7 @@ RELEASE="$(rpm -E '%fedora')"
 dnf5 install -y --nogpgcheck \
   https://kojipkgs.fedoraproject.org/work/tasks/2312/144642312/kmodtool-1.2-4.fc45.noarch.rpm
 
-dnf5 install -y rpm-build "kernel-devel-${KERNEL}"
+dnf5 install -y rpm-build dnf5-plugins "kernel-devel-${KERNEL}"
 
 dnf5 -y copr enable mulderje/facetimehd-kmod
 
@@ -24,6 +24,7 @@ WORKDIR="$(mktemp -d)"
 (
   cd "${WORKDIR}"
   dnf5 download --source akmod-facetimehd
+  dnf5 builddep -y facetimehd-kmod-*.src.rpm
   rpmbuild --rebuild --define "_topdir ${WORKDIR}/rpmbuild" facetimehd-kmod-*.src.rpm
 )
 
