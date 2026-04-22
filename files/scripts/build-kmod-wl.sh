@@ -12,21 +12,38 @@ dnf5 install -y \
   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
-### BUILD wl (succeed or fail-fast with debug output)
-# Install akmods first so its scriptlets create the `akmods` system user.
-# In minimal OCI builds, the implicit Requires: chain from akmod-wl
-# sometimes leaves the user uncreated, which makes `akmods` fall through
-# to invoking akmodsbuild as root and trip its "-w /" guard:
-#   >>> ERROR: Not to be used as root; start as user or 'akmodsbuild' instead.
-dnf5 install -y \
-  akmods \
-  akmod-wl-*.fc${RELEASE}.${ARCH}
+# Install akmods + kernel-devel up front so (a) akmods's scriptlet creates
+# the `akmods` system user, and (b) akmodsbuild has a kernel tree to build
+# against when we invoke it below.
+dnf5 install -y akmods "kernel-devel-${KERNEL}"
 
-# Belt-and-braces: if the scriptlet still didn't create the user, do it now.
+# Belt-and-braces: if akmods's scriptlet didn't create the user, do it now.
 getent passwd akmods >/dev/null \
   || useradd -r -s /sbin/nologin -d /var/cache/akmods akmods
 
-akmods --force --kernels "${KERNEL}" --kmod wl
+# Download the akmod RPM but DO NOT install it. Its kmodtool-generated
+# %post synchronously calls `akmods-ostree-post` → `akmodsbuild`, which
+# trips `akmodsbuild`'s id-u-0 root guard in OCI builds and aborts the
+# transaction. We want the .src.rpm it ships under /usr/src/akmods/, not
+# the trigger RPM itself. Then build the per-kernel kmod RPM directly by
+# running `akmodsbuild` as the akmods user (bypassing the broken %post).
+WORKDIR="/var/cache/akmods/_build_wl"
+mkdir -p "${WORKDIR}"
+chown akmods:akmods "${WORKDIR}"
+(
+  cd "${WORKDIR}"
+  dnf5 download akmod-wl
+  rpm2cpio akmod-wl-*.rpm | cpio -idm './usr/src/akmods/*.src.rpm'
+  chown -R akmods:akmods usr
+  runuser -u akmods -- akmodsbuild \
+    --kernels "${KERNEL}" \
+    --target "${ARCH}" \
+    --outputdir "${WORKDIR}" \
+    usr/src/akmods/wl-kmod-*.src.rpm
+)
+
+dnf5 install -y "${WORKDIR}"/kmod-wl-*.rpm
+
 modinfo /usr/lib/modules/${KERNEL}/extra/wl/wl.ko.xz >/dev/null ||
   (find /var/cache/akmods/wl/ -name \*.log -print -exec cat {} \; && exit 1)
 
