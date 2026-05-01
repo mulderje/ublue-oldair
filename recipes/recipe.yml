@@ -19,7 +19,6 @@ modules:
     install:
       - helix
       - jq
-      - mbpfan
       - neovim
       - policycoreutils-python-utils
       - ripgrep
