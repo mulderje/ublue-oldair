@@ -17,7 +17,7 @@ modules:
 
   - type: dnf
     install:
-      - packages:
+      packages:
         - helix
         - jq
         - neovim
