@@ -17,15 +17,16 @@ modules:
 
   - type: dnf
     install:
-      - helix
-      - jq
-      - neovim
-      - policycoreutils-python-utils
-      - ripgrep
-      - setools-console
-      - setools-console-analyses
-      - setroubleshoot-server
-      - vim
+      - packages:
+        - helix
+        - jq
+        - neovim
+        - policycoreutils-python-utils
+        - ripgrep
+        - setools-console
+        - setools-console-analyses
+        - setroubleshoot-server
+        - vim
 
   - type: script
     scripts:
